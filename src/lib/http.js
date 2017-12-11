@@ -5,17 +5,12 @@
 /* eslint no-undef: "error" */
 import axios from 'axios'
 
-const querystring = require('query-string');
-
 const instance = axios.create({
     timeout: 15000,
+    headers: {'content-type': 'application/json'}
 });
 
 instance.defaults.withCredentials = true;
-
-instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-instance.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded';
-
 
 class Http {
     // baseURL = 'http://api.wenshenjishi.com';
@@ -43,11 +38,8 @@ class Http {
         options['method'] = method;
         options['baseURL'] = this.baseURL;
 
-        if (method === 'post' || method === 'put')
-            options['transformRequest'] = [function (data) {
-                data = querystring.stringify(data, {arrayFormat: 'bracket'});
-                return data;
-            }];
+        if (!options.data)
+            options.data = {}; //只有这样axios才会在delete带上content-type
 
         try {
             response = await instance(options);

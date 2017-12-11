@@ -1,34 +1,13 @@
-import UserList from './screen/user/UserList'
-import EditUser from './screen/user/EditUser'
+import {resourceMaker} from "./lib/rest";
 
 const menus = [
     {
-        children: [{
-            title: '注册用户管理',
-            screens: [
-                {
-                    path: '/users',
-                    exact: true,
-                    component: UserList
-                },
-                {
-                    path: '/users/edit/:id',
-                    exact: true,
-                    component: EditUser
-                }
-            ]
-        }],
+        children: [
+            resourceMaker('/users', require('./menu/user/user')),
+            resourceMaker('/ins/users', require('./menu/user/ins_user'))
+        ],
         title: '用户管理',
 
-    }, {
-        title: '注册用户2',
-        screens: [
-            {
-                path: '/users2',
-                exact: true,
-                component: UserList
-            }
-        ]
     }
 ];
 

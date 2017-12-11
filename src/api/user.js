@@ -1,11 +1,5 @@
-import {http} from '../util/http'
+import {http} from '../lib/http'
+import {RestModel} from '../lib/rest'
 
-
-export const getUsers = async () => {
-    const res = await http.get('/api/admin/users');
-    if (res.isOk) {
-        res.data.data.list.map((item, i) => item.key = item.id)
-    }
-
-    return res
-};
+export const users = new RestModel('users')
+export const ins_users = new RestModel('ins/users')
