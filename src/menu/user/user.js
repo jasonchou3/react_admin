@@ -7,6 +7,13 @@ const genderOpts = {
     '-1': '未知',
 };
 
+const roleOpts = {
+    0: '用户',
+    10: '员工',
+    1000: '管理员',
+    10000: '超级管理员',
+};
+
 export const request = users;
 export const list = {
     title: '注册用户管理',
@@ -28,6 +35,14 @@ export const list = {
         render: v => {
             return genderOpts[v]
         }
+    }, {
+        title: '身份',
+        dataIndex: 'role',
+        width: 70,
+        sorter: true,
+        render: v => {
+            return roleOpts[v]
+        }
     }]
 };
 
@@ -43,17 +58,16 @@ export const update = {
         type: 'phone',
         required: true
     }, {
+        name: 'role',
+        label: '身份',
+        component: 'select',
+        required: true,
+        selOpts: roleOpts,
+        selDefOpt: 0
+    },{
         name: 'password',
         label: '密码',
         type: 'password',
-        required: true
-    }, {
-        name: 'gender',
-        label: '性别',
-        component: 'select',
-        required: true,
-        selOpts: genderOpts,
-        selDefOpt: -1
     },
     ]
 };

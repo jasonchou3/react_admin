@@ -52,7 +52,7 @@ export default class FormScreen extends Component {
         this.setState({[loadingPropName]: true});
         const res = await this.getInitDataApi(this.props.match.params.id);
         if (res.isOk) {
-            this.setState({[loadingPropName]: false, data: res.data.data})
+            this.setState({[loadingPropName]: false, data: res.data.data, initErrMsg: null})
         } else {
             this.setState({[loadingPropName]: false, initErrMsg: res.data.msg})
         }
